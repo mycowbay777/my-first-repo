@@ -1,0 +1,13 @@
+<Q3>
+q1(with inline):12797 microseconds
+q2(without inline): 25963 microseconds
+
+q2-q1=25963-12797=13166 microseconds
+time saved per call = 13166/10,000,000
+                    = 0.0013166 microseconds
+
+<Q4>
+(4a): inline 是可以把函式的內容複製貼上到呼叫的地方，如果今天呼叫的地方越多，程式就會變得更龐大，CPU 的指令快取裝不下這麼多程式碼，只好更常去比較慢的記憶體讀取，導致使用效率變差，速度變慢
+(4b): 編譯器在開啟最佳化時自己就能知道那些函式會常被呼叫，自動幫你inline，就算不寫inline也不會有太大影響。反而到處手動寫 inline，會讓程式碼在維護時更難處理，好處卻很小。
+
+<Q5>

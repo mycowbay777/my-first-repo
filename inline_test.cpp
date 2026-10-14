@@ -12,7 +12,6 @@ inline unsigned long __attribute__((always_inline)) successor(unsigned long n)
 {
     return n + 1;
 }
-
 int main()
 {
     auto start = co::high_resolution_clock::now();
