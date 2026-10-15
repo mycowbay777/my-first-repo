@@ -11,3 +11,5 @@ time saved per call = 13166/10,000,000
 (4b): 編譯器在開啟最佳化時自己就能知道那些函式會常被呼叫，自動幫你inline，就算不寫inline也不會有太大影響。反而到處手動寫 inline，會讓程式碼在維護時更難處理，好處卻很小。
 
 <Q5>
+1.因為程式使用了using namespace std;，class宣告的名字剛好跟std::vector撞名，導致編譯器不知道main函式裡宣告zero和vecs的vector是指哪一個
+2.編譯器考慮的選項有標準函式庫的std::vector和第17行定義的vector
