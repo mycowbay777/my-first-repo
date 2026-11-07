@@ -22,7 +22,7 @@ void DFF::reset(State s){
 }
 void DFF::clk(State s){
     if(s==State::Z){
-        throw std::invalid_argument("RESET cannot be Z");
+        throw std::invalid_argument("CLK cannot be Z");
     }
     bool rising={s==State::H&&prevclk_==State::L};
     prevclk_=s;
