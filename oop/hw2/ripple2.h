@@ -12,7 +12,8 @@ public:
     State count(unsigned);
     void print();
 private:
-    /* Private members */
+    DFF ff0_;
+    DFF ff1_;
 };
 
 #endif
