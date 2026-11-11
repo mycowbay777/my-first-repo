@@ -2,10 +2,11 @@
 #include<stdexcept>
 #include"ripple2.h"
 
-Ripple2::Ripple2(){}
+Ripple2::Ripple2(){ff1_.clk(ff0_.qb());}
 void Ripple2::reset(State s){
     ff0_.reset(s);
     ff1_.reset(s);
+    ff1_.clk(ff0_.qb());
 }
 void Ripple2::en(State  s){
     ff0_.en(s);
