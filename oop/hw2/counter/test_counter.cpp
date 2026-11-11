@@ -1,10 +1,9 @@
-#include "dff.h"
-#include "ripple2.h"
+#include "counter.h"
 #include <cassert>
 
 int main()
 {
-    Ripple2 rp;
+    Counter rp;
     rp.en(State::H);
     rp.clk(State::L);
     rp.clk(State::H);

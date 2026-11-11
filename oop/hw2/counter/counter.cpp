@@ -5,7 +5,6 @@
 Counter::Counter() {}
 
 void Counter::reset(State s) {
-    // 參考 DFF::reset，但歸零的是 value_
     if(s==State::Z){
         throw std::invalid_argument("RESET cannot be Z");
     }
@@ -16,19 +15,42 @@ void Counter::reset(State s) {
 }
 
 void Counter::en(State s) {
-    // 跟 DFF::en 一樣
+    if(s==State::Z){
+        throw std::invalid_argument("EN cannot be Z");
+    }
+    en_=s;
 }
 
 void Counter::clk(State s) {
-    // 參考 DFF::clk 的結構
-    // 最後一步不是 q_ = d_，而是讓 value_ 加 1，並且 4 要變回 0
+    if(s==State::Z){
+        throw std::invalid_argument("CLK cannot be Z");
+    }
+    bool rising={s==State::H&&prevClk_==State::L};
+    prevClk_=s;
+    if(!rising){ //不是正緣
+        return;
+    }
+    if(en_==State::L||reset_==State::H){ //en沒開或正在reset
+        return;
+    }
+    value_ = value_ + 1;
+    if (value_ == 4) value_ = 0;
 }
 
 State Counter::count(unsigned i) {
-    // i 不是 0 或 1 → throw
-    // 用 (value_ >> i) & 1 取出第 i 位，1 回傳 H，0 回傳 L
+    if (i > 1) {
+        throw std::invalid_argument("count index must be 0 or 1");
+    }
+    if (((value_ >> i) & 1) == 1) {
+        return State::H;
+    }
+    return State::L;
 }
 
 void Counter::print() {
-    // 跟 Ripple2::print 類似，但改用 count(1)、count(0)
+    if(count(1)==State::H) std::cout<<"1";
+    else std::cout<<"0";
+    if(count(0)==State::H) std::cout<<"1";
+    else std::cout<<"0";
+    std::cout<<std::endl;
 }
